@@ -14,7 +14,7 @@
     /* Horizontally centers the child */
     align-items: center;
     /* Vertically centers the child */
-    height: 100vh;
+    margin-top: 15px;
     /* Adjust the height as needed */
 }
 
