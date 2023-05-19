@@ -15,22 +15,12 @@ var (
 func main() {
 	path := `D:\Adil\go\test\hackathon-1018f-firebase-adminsdk-tfuqo-8825075380.json`
 	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", path)
-
+	go additin()
 	http.HandleFunc("/", trash.Home)
 	http.HandleFunc("/person", trash.Person)
 	http.Handle("/templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir("./templates"))))
 	http.ListenAndServe(":7777", nil)
 
-	// post := trash.Post{
-	// 	GasValue:    randomint(),
-	// 	Humidity:    float64(randomint()),
-	// 	Pressure:    randomint(),
-	// 	Temperature: float64(randomint()),
-	// 	UserId:      randomint() % 6,
-	// 	WaterValue:  randomint(),
-	// 	Time:        cur_time(),
-	// }
-	// repoo.Add(&post)
 }
 
 // ////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +33,7 @@ func randomint() int64 {
 	return int64(randomNumber)
 }
 
-// ///////////////////////////////////////////////////////////////////////////////////////
+// // ///////////////////////////////////////////////////////////////////////////////////////
 func cur_time() string {
 	// Get the current time
 	currentTime := time.Now()
@@ -54,3 +44,38 @@ func cur_time() string {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+func additin() {
+	// Create a ticker that triggers every 15 seconds
+	ticker := time.NewTicker(15 * time.Second)
+
+	// Start a goroutine to run the function repeatedly
+	go func() {
+		for {
+			// Call your function here
+			adc()
+
+			// Wait for the ticker to trigger
+			<-ticker.C
+		}
+	}()
+
+	// Sleep for a while to allow the function to run
+	time.Sleep(1 * time.Hour)
+
+	// Stop the ticker when done
+	ticker.Stop()
+}
+
+func adc() {
+	post := trash.Post{
+		GasValue:    randomint(),
+		Humidity:    25, //
+		Pressure:    randomint(),
+		Temperature: 16, //
+		UserId:      randomint() % 6,
+		WaterValue:  0,
+		Time:        cur_time(),
+	}
+	repoo.Add(&post)
+}
